@@ -6,8 +6,8 @@ const postRoutes = require('./posts/postRoutes');
 
 const router = express.Router();
 
-router.user('/users', userRoutes);
-router.user('/posts', postRoutes);
+router.use('/users', userRoutes);
+router.use('/posts', postRoutes);
 
 server.listen(5000, () =>
   console.log('Server running on http://localhost:5000')
