@@ -1,23 +1,23 @@
 const postData = require("../data/helpers/postDb.js");
 const express = require('express');
-const server = express();
+const router = express().Router;
 
-server.get("/", (req,res) => {
+router.get("/", (req,res) => {
     postData.get().then().catch();
 })
 
-server.get("/:id", (req,res) => {
+router.get("/:id", (req,res) => {
     postData.getById(req.params.id).then().catch();
 })
 
-server.post("/", (req,res) => {
+router.post("/", (req,res) => {
     postData.insert(req.body).then().catch();
 })
 
-server.put("/:id", (req,res) => {
+router.put("/:id", (req,res) => {
     postData.update(req.body, req.params.id).then().catch();
 })
 
-server.delete("/:id", (req,res) => {
+router.delete("/:id", (req,res) => {
     postData.delete(req.body, req.params.id).then().catch();
 })
