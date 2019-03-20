@@ -1,6 +1,7 @@
-const postData = require("../data/helpers/postDb.js");
+
 const express = require('express');
-const router = express().Router;
+const router = express.Router();
+const postData = require("../data/helpers/postDb.js");
 
 router.get("/", (req,res) => {
     postData.get().then().catch();
@@ -21,3 +22,5 @@ router.put("/:id", (req,res) => {
 router.delete("/:id", (req,res) => {
     postData.delete(req.body, req.params.id).then().catch();
 })
+
+module.exports = router;
