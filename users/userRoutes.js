@@ -24,19 +24,29 @@ router.post("/", (req,res) => {
 })
 
 router.put("/:id", (req,res) => {
-    userData.update(req.params.id, req.body)
-    .then(
-        (id) => res.status(201).json(user)
-    )
-    .catch(
-        () => res.status(500).json({ message: "There were errors in updating your user"})
+    if(!userData.getById(req.params.id)) {
+        res.status(400).json({ message: "The user with the specified ID does not exist." });
+    }
+    else {
+        userData.update(req.params.id, req.body)
+        .then(
+            (id) => res.status(201).json(user)
+        )
+        .catch(
+            () => res.status(500).json({ message: "There were errors in updating your user"})
     );
+    }
 })
 
 router.delete("/:id", (req,res) => {
+    if(!userData.getById(req.params.id)) {
+        res.status(400).json({ message: "The user with the specified ID does not exist." });
+    }
+    else {
     userData.remove(req.params.id)
     .then((id) => res.json(id))
     .catch(() => res.status(500).json({ message: "There were errors in deleting your post"}));
+    }
 })
 
 module.exports = router;
